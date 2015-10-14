@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nativRet = NativeBus.getInstance().invoke("MainActivity", "param");
+                String nativRet = NativeBus.getInstance().invoke("MainActivity", "params");
                 Toast.makeText(MainActivity.this, nativRet, Toast.LENGTH_SHORT).show();
             }
         });
