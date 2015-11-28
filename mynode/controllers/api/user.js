@@ -29,7 +29,7 @@ exports.listAll = function (req, res, next) {
         } else {
             res.json({
                 code: Code.SUCCESS,
-                message: "",
+                message: "get users success",
                 data: users,
             });
         }
