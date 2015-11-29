@@ -8,13 +8,16 @@ import React, {
     View,
     Platform,
     Text,
+    TouchableOpacity,
 } from 'react-native';
 
 export default function () {
     return (
         <View style={styles.container}>
-            <Text>Welcome {this.state.username}, age is {this.state.age}</Text>
-            <Text>This is native App MainScene</Text>
+            <TouchableOpacity onPress={this.onTextPress.bind(this)}>
+                <Text>Welcome {this.state.username}, age is {this.state.age}</Text>
+                <Text>This is native App MainScene</Text>
+            </TouchableOpacity>
         </View>
     );
 }

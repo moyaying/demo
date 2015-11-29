@@ -8,6 +8,10 @@ import Render from './AppRender';
 import React from 'react-native';
 
 import UserInteract from '../interactor/UserInteract';
+import Dispatcher, {PropType} from '../dispatcher/Dispatcher';
+
+//initialize app
+//Object.assign(React.Component.prototype, PropType);//给所有Component都加上消息事件
 
 
 var currentUser;
@@ -24,6 +28,11 @@ function getAgeState() {
     };
 }
 
+/**
+ * 这里主要是写业务逻辑
+ *
+ * Render主要是写UI
+ */
 export default class App extends React.Component {
     constructor(props) {
         super(props);
@@ -33,6 +42,13 @@ export default class App extends React.Component {
             getUserNameState(),
             getAgeState()
         );
+
+        //为了让UI触发回调的时候，this能使用。
+        this.onTextPress = this.onTextPress.bind(this);
+        this.listenCallBack = this.listenCallBack.bind(this);
+
+        Dispatcher.addListener(this.listenCallBack);
+        //this.addListener(this.listenCallBack)
     }
 
     componentDidMount() {
@@ -57,5 +73,18 @@ export default class App extends React.Component {
                 this.setState(getAgeState());
             }
         });
+    }
+
+    onTextPress(event){
+        Dispatcher.dispatch(currentUser);
+        //this.dispatch(currentUser);
+
+
+        //let r = Dispatcher.removeListener(this.listenCallBack);
+        //console.log("remvoe listener:" + r);
+    }
+
+    listenCallBack(action){
+        console.log(action);
     }
 }
