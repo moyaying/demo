@@ -3,16 +3,14 @@
  */
 'use strict';
 
-var domain = 'http://192.168.4.107:3000/api/';
+//var domain = 'http://192.168.4.107:3000/api/';
+var domain = 'http://localhost:3000/api/';
 
-var httpConst = {
+export var URLS = {
     DOMAIN: domain,
     USER: `${domain}user`,
 }
 
-var code = {
-    SUCCESS: 10000,
+export var Code = {
+    SUCCESS: 1,
 }
-
-exports.HTTP_CONST = httpConst;
-exports.CODE = code;
