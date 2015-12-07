@@ -4,9 +4,16 @@
 'use strict';
 
 class Message {
-    constructor(code, message) {
+    constructor(code, message, data) {
         this.code = code;
         this.message = message;
+        //if(status){
+        //    this.status = status;
+        //} else {
+        //    this.status = 200;
+        //}
+
+        this.data = data;
     }
 }
 

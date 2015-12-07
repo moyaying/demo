@@ -9,6 +9,12 @@ router.route('/')
 	.post(userController.create)
 	.get(userController.listAll);
 
+router.route('/login')
+	.get(userController.login);
+
+router.route('/register')
+	.post(userController.register);
+
 router.route('/:user_id')
 	.get(userController.findUserById)		//query data
 	.put(userController.updateUserById)		//for update data

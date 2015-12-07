@@ -7,11 +7,24 @@ import Render from './AppRender';
 
 import React from 'react-native';
 
-import UserInteract from '../interactor/UserInteract';
+//import UserInteract from '../interactor/UserInteract';
 import Dispatcher, {PropType} from '../dispatcher/Dispatcher';
+import User from '../model/User';
+import UserInteract from '../interactor/UserInteract';
+var md5 = require('md5');
 
 //initialize app
 //Object.assign(React.Component.prototype, PropType);//给所有Component都加上消息事件
+UserInteract.login('moo', md5('1'), (err, data)=>{
+    if(err){
+        console.log(err);
+    } else {
+        User.getInstance().updateUser(data);
+        User.getInstance().isLogin = true;
+
+        console.log('自动登录成功!');
+    }
+});
 
 
 var currentUser;
@@ -38,7 +51,7 @@ export default class App extends React.Component {
         super(props);
 
         this.state = Object.assign(
-            {},
+            {page: 'travel'},
             getUserNameState(),
             getAgeState()
         );
@@ -60,24 +73,25 @@ export default class App extends React.Component {
     }
 
     _fetchUsers(){
-        UserInteract.getAllUsers((err, users) => {
-            if (err) {
-                console.log(err);
-            } else {
-                for (let user of users) {
-                    currentUser = user;
-                }
-
-                //update view
-                this.setState(getUserNameState());
-                this.setState(getAgeState());
-            }
-        });
+        //UserInteract.getAllUsers((err, users) => {
+        //    if (err) {
+        //        console.log(err);
+        //    } else {
+        //        for (let user of users) {
+        //            currentUser = user;
+        //        }
+        //
+        //        //update view
+        //        this.setState(getUserNameState());
+        //        this.setState(getAgeState());
+        //    }
+        //});
     }
 
     onTextPress(event){
         Dispatcher.dispatch(currentUser);
         //this.dispatch(currentUser);
+
 
 
         //let r = Dispatcher.removeListener(this.listenCallBack);
@@ -87,4 +101,19 @@ export default class App extends React.Component {
     listenCallBack(action){
         console.log(action);
     }
+
 }
+
+//var Us = function(name){
+//    this.name = name;
+//}
+//Us.prototype = {
+//    hi: function(){
+//        console.log("***" + this.name);
+//    }
+//}
+////Us.prototype.hi =  function(){
+////    console.log(this.name);
+////}
+//var us = new Us("ggg");
+//us.hi();

@@ -7,8 +7,11 @@ var Code = require('../../const').Code;
 
 var Message = require('../../models/res-data').Message;
 
+//user route
 router.use('/user/', require('./user'));
+router.use('/travelMessage/', require('./travelMessage'));
 
+//index route
 router.get('/', function (req, res, next) {
     res.json(new Message(Code.ERROR, "welcome to api, but nothing back!"));
 });
